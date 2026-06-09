@@ -100,7 +100,7 @@ public class CourseSchedule {
         //Now BFS, breaking the connections in graph.
         while (!q.isEmpty()) {
             int curr = q.poll();
-            if (inDegree[curr] == 0) finish++;
+            finish++;
             if (!adj.containsKey(curr)) continue;
 
             for(int nei : adj.get(curr)) {
