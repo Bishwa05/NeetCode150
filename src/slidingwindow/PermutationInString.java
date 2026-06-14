@@ -1,44 +1,45 @@
 package slidingwindow;
 
-import java.util.Arrays;
-
 public class PermutationInString {
     public boolean checkInclusion(String s1, String s2) {
-        int[] arr = new int[26];
-        Arrays.fill(arr, Integer.MIN_VALUE);
-        for (char c : s1.toCharArray()) {
-            int i = c-'a';
-            if(arr[i] ==  Integer.MIN_VALUE) {
-                arr[i] = 0;
-            } else {
-                arr[i]++;
-            }
+        if (s1.length() > s2.length()) return false;
 
+        int[] s1Count = new int[26];
+        int[] s2Count = new int[26];
+
+        for (int i = 0; i < s1.length(); i++) {
+            s1Count[s1.charAt(i) - 'a']++;
+            s2Count[s2.charAt(i) - 'a']++;
         }
-        int [] arr2 = Arrays.copyOf(arr, 26);
-        int count2 = 0;
-
-        int wS = 0, wE = 0;
-        for (wE = 0; wE < s2.length(); wE++) {
-            int i = s2.charAt(wE) -'a';
-            if (arr2[s2.charAt(wE) -'a'] != Integer.MIN_VALUE) {
-                wS = wE;
-                // arr2 = Arrays.copyOf(arr, 26);
-            }
-
-            while (arr2[s2.charAt(wE) -'a'] != Integer.MIN_VALUE) {
-                arr2[s2.charAt(wE) -'a']--;
-                count2++;
-                wE++;
-            }
-        }
+        int matches = 0;
 
         for (int i = 0; i < 26; i++) {
-            if (arr2[i] != 0 || arr2[i] != Integer.MIN_VALUE) {
-                return false;
-            }
+            if (s1Count[i] == s2Count[i]) matches++;
         }
-        return true;
+
+        int wS = 0;
+
+        for (int wE = s1.length(); wE < s2.length(); wE++) {
+            if (matches == 26) return true;
+
+            int index = s2.charAt(wE) -'a';
+            s2Count[index]++;
+            if (s1Count[index] == s2Count[index]) {
+                matches++;
+            } else if (s1Count[index] + 1 == s2Count[index]) {
+                matches--;
+            }
+
+            index = s2.charAt(wS) - 'a';
+            s2Count[index]--;
+            if (s1Count[index] == s2Count[index]) {
+                matches++;
+            } else if (s1Count[index] - 1 == s2Count[index]) {
+                matches--;
+            }
+            wS++;
+        }
+        return matches == 26;
     }
 
     public static void main(String[] args) {
