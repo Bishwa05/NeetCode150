@@ -1,5 +1,8 @@
 package arrays;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Given an array of integers nums and an integer target, return the indices i and j such that nums[i] + nums[j] == target and i != j.
  *
@@ -17,13 +20,15 @@ package arrays;
  */
 public class TwoSum {
     public int[] twoSum(int[] nums, int target) {
-        int i = 0, j = nums.length-1;
 
-        while(i < j) {
-            int sum = nums[i] + nums[j];
-            if (sum > target) j--;
-            else if (sum < target) i++;
-            else return new int[]{i, j};
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++) {
+            int val = target - nums[i];
+            if (map.containsKey(val)) {
+                return new int[] {map.get(val), i};
+            }
+            map.put(nums[i], i);
         }
 
         return new int[] {-1, -1};

@@ -19,7 +19,6 @@ public class KClosestPointsToOrigin {
 
         for (int[] point : points) {
             double d = distance(point[0], point[1]);
-            System.out.println(d);
             heap.offer(new Point(point[0], point[1], d));
 
             if (heap.size() > k) {
