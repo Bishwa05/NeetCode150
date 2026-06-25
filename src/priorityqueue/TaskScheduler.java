@@ -8,7 +8,7 @@ import java.util.Queue;
  *
  * https://neetcode.io/problems/task-scheduling
  *
- * You are given an array of CPU tasks tasks, where tasks[i] is an uppercase english character from A to Z. You are also given an integer n.
+ * You are given an array of CPU tasks tasks, where tasks[i] is an uppercase English character from A to Z. You are also given an integer n.
  *
  * Each CPU cycle allows the completion of a single task, and tasks may be completed in any order.
  *
@@ -60,7 +60,7 @@ public class TaskScheduler {
             }
 
             if (!coolQ.isEmpty() && coolQ.peek()[1] == time) {
-                maxHeap.offer(coolQ.poll()[0]);
+                    maxHeap.offer(coolQ.poll()[0]);
             }
         }
         return time;

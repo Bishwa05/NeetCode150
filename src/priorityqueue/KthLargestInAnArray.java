@@ -25,6 +25,7 @@ import java.util.PriorityQueue;
 public class KthLargestInAnArray {
     public int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> heap = new PriorityQueue<>();
+        if (k > nums.length) return -1;
 
         for (int num : nums) {
             heap.offer(num);
