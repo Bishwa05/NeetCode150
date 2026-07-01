@@ -41,7 +41,7 @@ public class CheapestFlightsWithinKStops {
             if (remainingStop > 0) {
                  for (int i = 0; i < n; i++) {
                      if (priceMat[place][i] > 0) {
-                         minHeap.offer(new int[] {price + priceMat[place][i], i, remainingStop});
+                         minHeap.offer(new int[] {price + priceMat[place][i], i, remainingStop-1});
                      }
                  }
              }
